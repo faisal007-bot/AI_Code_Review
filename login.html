@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | AI Code Reviewer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/auth.css">
+</head>
+
+<body class="auth-bg">
+
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+    
+    <div class="auth-card-wrapper w-100 position-relative" style="max-width: 480px;">
+        
+        <!-- Decorative Doodle  -->
+        <div class="position-absolute top-0 start-100 translate-middle d-none d-md-block" style="margin-top: 25px; margin-left: -35px; z-index: 20;">
+            <div class="doodle-float">
+                <div style="font-family: 'Caveat', cursive; color: #8b5cf6; font-size: 1.8rem; white-space: nowrap; transform: rotate(15deg);">
+                    Welcome Back! ♡
+                </div>
+            </div>
+        </div>
+
+        <div class="card auth-card border-0 shadow-lg rounded-4 p-4 p-sm-5">
+            <!-- Logo -->
+            <div class="text-center mb-4">
+                <div class="icon-circle bg-primary-subtle text-primary mx-auto mb-3 d-flex justify-content-center align-items-center rounded-circle shadow-sm" style="width: 72px; height: 72px;">
+                    <i class="bi bi-box-arrow-in-right fs-1"></i>
+                </div>
+                <h2 class="fw-bold text-dark mb-1">Welcome Back</h2>
+                <p class="text-muted small mb-0">Log in to continue to your workspace</p>
+            </div>
+
+            <form id="loginForm" novalidate>
+                <!-- User Email -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-muted small text-uppercase" for="email">Email Address</label>
+                    <div class="input-group input-group-lg has-validation">
+                        <span class="input-group-text bg-light text-muted border-light"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control bg-light border-light" id="email" placeholder="name@company.com" autocomplete="email">
+                        <div class="invalid-feedback" id="emailError"></div>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="form-label fw-bold text-muted small text-uppercase mb-0" for="password">Password</label>
+                        <a href="forgotpassword.html" class="text-primary small fw-bold text-decoration-none hover-link">Forgot Password?</a>
+                    </div>
+                    <div class="input-group input-group-lg has-validation">
+                        <span class="input-group-text bg-light text-muted border-light"><i class="bi bi-shield-lock"></i></span>
+                        <input type="password" class="form-control bg-light border-light" id="password" placeholder="Enter Password" autocomplete="current-password">
+                        <button class="btn btn-light border-light bg-light text-muted" type="button" id="togglePassword">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <div class="invalid-feedback" id="passwordError"></div>
+                    </div>
+                </div>
+
+                <!-- API Message -->
+                <div id="message" class="mb-3"></div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-primary-gradient w-100 py-3 rounded-pill fw-bold shadow-sm hover-lift mb-4" id="loginBtn">
+                    <span id="spinner" class="spinner-border spinner-border-sm d-none me-2"></span>
+                    <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                </button>
+
+                <!-- Signup -->
+                <div class="text-center">
+                    <span class="text-muted small">Don't have an account?</span>
+                    <a href="signup.html" class="text-primary fw-bold ms-1 text-decoration-none hover-link">Create Account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script src="./js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Workspace | AI Reviewer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/code-editor.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <!-- 1. Left Navigation Sidebar -->
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <div class="brand-icon-shield">
+                    <i class="bi bi-shield-lock-fill" id="brandIcon"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title" id="brandTitle">System Admin</span>
+                    <span class="brand-subtitle" id="brandSubtitle">Console v2.0</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="sidebar-link" id="navDashboard">
+                    <i class="bi bi-house-door-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="code-editor.html" class="sidebar-link active">
+                    <i class="bi bi-code-square"></i>
+                    <span>Code Workspace</span>
+                </a>
+                <a href="admin-dashboard.html#usersSection" class="sidebar-link" id="navUsers">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Users</span>
+                </a>
+                <a href="admin-dashboard.html#reviewsSection" class="sidebar-link" id="navReviews">
+                    <i class="bi bi-star-fill"></i>
+                    <span>Reviews</span>
+                </a>
+                <a href="user-dashboard.html" class="sidebar-link" id="navUserView">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>User View</span>
+                </a>
+                <a href="user-profile.html" class="sidebar-link d-none" id="navProfile">
+                    <i class="bi bi-person"></i>
+                    <span>My Profile</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer-widget mt-auto">
+                <div class="doodle-note">Keep<br>Coding ♡</div>
+                <div class="plant-laptop-art">
+                    <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 88L26 112H44L48 88H22Z" fill="#F0ECE1"/>
+                        <path d="M35 88C35 60 15 50 10 52C10 68 25 80 35 88Z" fill="#2DD4BF"/>
+                        <path d="M35 88C35 55 52 45 58 48C60 62 48 78 35 88Z" fill="#14B8A6"/>
+                        <path d="M35 88V35C30 35 25 45 35 88Z" fill="#0D9488"/>
+                        <path d="M60 106L72 74H146L154 106H60Z" fill="#2563EB" opacity="0.9"/>
+                        <rect x="74" y="56" width="70" height="46" rx="4" fill="#3B82F6"/>
+                        <rect x="78" y="60" width="62" height="38" rx="2" fill="#0B132B"/>
+                        <text x="84" y="75" fill="#38BDF8" font-family="monospace" font-size="10">&lt;/&gt;</text>
+                        <rect x="84" y="82" width="30" height="3" rx="1.5" fill="#64748B"/>
+                        <rect x="84" y="88" width="45" height="3" rx="1.5" fill="#64748B"/>
+                    </svg>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 2. Main Content Canvas -->
+        <main class="main-content">
+            <header class="content-header d-flex justify-content-between align-items-center mb-4 pb-2">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="header-shield-badge">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h2 class="page-heading mb-0">Code Workspace</h2>
+                            <span class="doodle-sparkle">✦</span>
+                        </div>
+                        <p class="text-secondary small mb-0">Write, run, and analyze your code — all in one place.</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-4">
+                    <div class="header-doodle d-none d-xl-flex flex-column align-items-center text-center me-3">
+                        <span class="doodle-text text-primary">Good Code =<br>Better Tomorrow ♡</span>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="avatar-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="avatar-pill">
+                                <i class="bi bi-person-fill text-primary fs-5"></i>
+                            </div>
+                            <i class="bi bi-chevron-down small text-secondary ms-1"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2">
+                            <li><a class="dropdown-item py-2" href="admin-dashboard.html" id="dropdownDashboard"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+                            <li><a class="dropdown-item py-2 d-none" href="user-profile.html" id="dropdownProfile"><i class="bi bi-person me-2 text-primary"></i> Profile Settings</a></li>
+                            <li><button class="dropdown-item py-2 text-danger"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <form id="codeReviewForm">
+                <div class="controls-panel mb-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-3 bg-white p-2 rounded-4 shadow-sm border border-light">
+                            <div class="px-2 fw-bold text-muted small text-uppercase">Programming Language</div>
+                            
+                            <input type="hidden" id="languageSelect" value="Python" required>
+                            <div class="dropdown" id="editorLangWrapper">
+                                <button class="btn btn-light d-flex justify-content-between align-items-center custom-lang-btn py-2 px-3 fw-bold border" 
+                                        type="button" id="editorLangBtn" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 160px;">
+                                    <span id="selectedEditorLang"><i class="bi bi-filetype-py me-2 text-warning"></i>Java</span>
+                                    <i class="bi bi-chevron-down small text-muted ms-2"></i>
+                                </button>
+                                <ul class="dropdown-menu p-2 shadow-lg border-0 custom-lang-menu">
+                                    <li><a class="dropdown-item custom-lang-item rounded-2" href="#" data-lang="Java"><i class="bi bi-filetype-java me-2 text-primary"></i>Java</a></li>
+                                    <li><a class="dropdown-item custom-lang-item rounded-2 active-lang" href="#" data-lang="Python"><i class="bi bi-filetype-py me-2 text-warning"></i>Python</a></li>
+                                    <li><a class="dropdown-item custom-lang-item rounded-2" href="#" data-lang="C++"><i class="bi bi-filetype-raw me-2 text-secondary"></i>C++</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary-gradient py-2 px-4 fw-bold fs-6 shadow-sm rounded-pill" id="submitBtn">
+                            <span class="spinner-border spinner-border-sm d-none me-2" id="submitSpinner" role="status"></span>
+                            <i class="bi bi-play-fill me-1 fs-5"></i> Run Code
+                        </button>
+                    </div>
+                </div>
+
+                <div id="formAlert" class="alert alert-danger d-none shadow-sm rounded-4 border-0 mb-4" role="alert"></div>
+
+                <div class="editor-window-card mb-4 shadow-sm" id="reviewFormCard">
+                    <div class="editor-header d-flex justify-content-between align-items-center px-4 py-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-code-slash fs-5"></i> 
+                            <span class="fw-bold fs-5">Code Editor</span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold"><i class="bi bi-arrow-counterclockwise me-1"></i> Reset</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold"><i class="bi bi-floppy me-1"></i> Save</button>
+                        </div>
+                    </div>
+                    
+                    <div class="editor-body position-relative">
+                        <textarea class="form-control dark-code-area" id="codeSnippet" rows="12" placeholder="# Write your code here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="upload-window-card mb-5 shadow-sm p-4 bg-white rounded-4 border border-light">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="upload-icon-box bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                                <i class="bi bi-upload fs-5"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold">Upload Source File</h6>
+                                <span class="text-muted small">Upload a file or drag and drop it here.</span>
+                            </div>
+                        </div>
+                        <span id="fileUploadStatus" class="badge bg-light text-muted border px-3 py-2 rounded-pill"><i class="bi bi-file-earmark me-1"></i> No file uploaded</span>
+                    </div>
+
+                    <div class="file-drop-zone position-relative rounded-4 border-2 border-dashed">
+                        <input type="file" id="codeFile" class="file-input-overlay position-absolute top-0 start-0 w-100 h-100 opacity-0" style="cursor: pointer;">
+                        <div class="drop-zone-content text-center py-5">
+                            <div class="upload-cloud-icon mb-2">
+                                <i class="bi bi-cloud-arrow-up text-primary" style="font-size: 2.5rem;"></i>
+                            </div>
+                            <h6 class="fw-bold mb-0 text-dark"><span class="text-primary bg-primary-subtle px-3 py-1 rounded-pill me-2">Choose File</span> or drag and drop</h6>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div id="resultsContainer" class="d-none fade-in mb-5">
+                <div class="card result-summary-card shadow-sm mb-4 border-0 rounded-4">
+                    <div class="card-body p-4 d-flex align-items-center gap-4">
+                        <div class="score-circle d-flex align-items-center justify-content-center flex-shrink-0 text-white fw-bold fs-2 rounded-circle shadow" id="resultScore">--</div>
+                        <div>
+                            <h4 class="mb-1 text-dark fw-bold">Analysis Complete</h4>
+                            <p class="mb-0 text-muted fs-6">Review the metrics and recommendations below.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs custom-tabs mb-4 border-0" id="resultTabs" role="tablist">
+                    <li class="nav-item" role="presentation"><button class="nav-link active fw-bold text-danger rounded-pill shadow-sm" id="vuln-tab" data-bs-toggle="tab" data-bs-target="#vuln-pane" type="button" role="tab"><i class="bi bi-shield-exclamation me-1"></i> Security & Errors</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link fw-bold text-warning text-dark rounded-pill shadow-sm" id="rec-tab" data-bs-toggle="tab" data-bs-target="#rec-pane" type="button" role="tab"><i class="bi bi-lightbulb me-1"></i> Recommendations</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link fw-bold text-success rounded-pill shadow-sm" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-pane" type="button" role="tab"><i class="bi bi-code-slash me-1"></i> Refactored Code</button></li>
+                </ul>
+
+                <div class="tab-content" id="resultTabsContent">
+                    <div class="tab-pane fade show active" id="vuln-pane" role="tabpanel">
+                        <div id="syntaxErrorsList" class="mb-4"></div>
+                        <div id="securityVulnList"></div>
+                    </div>
+                    <div class="tab-pane fade" id="rec-pane" role="tabpanel">
+                        <div id="recommendationsList"></div>
+                    </div>
+                    <div class="tab-pane fade" id="code-pane" role="tabpanel">
+                        <div class="card editor-window-card text-light border-0 shadow-sm rounded-4 overflow-hidden">
+                            <div class="editor-header d-flex justify-content-between align-items-center py-3 px-4">
+                                <span id="refactoredFileName" class="fw-bold text-info font-monospace fs-6"></span>
+                                <button class="btn btn-sm btn-light rounded-pill px-3 fw-bold text-dark shadow-sm" onclick="copyCode()"><i class="bi bi-clipboard me-1"></i> Copy Code</button>
+                            </div>
+                            <div class="editor-body p-0">
+                                <pre class="m-0 p-4"><code id="refactoredCodeBlock" class="text-light fs-6" style="font-family: 'Fira Code', monospace;"></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+        <div id="systemToast" class="toast align-items-center text-white custom-saas-toast border-0 mb-3" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2" id="systemToastBody"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/code-editor.js"></script>
+</body>
+</html>

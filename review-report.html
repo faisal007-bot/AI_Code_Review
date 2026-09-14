@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Review Report | AI Code Reviewer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/review-report.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <!-- =======================================================
+             1. Left Navigation Sidebar
+             ======================================================= -->
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <div class="brand-icon-shield">
+                    <i class="bi bi-cpu-fill"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">Developer</span>
+                    <span class="brand-subtitle">Workspace</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="user-dashboard.html" class="sidebar-link">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="code-editor.html" class="sidebar-link">
+                    <i class="bi bi-code-square"></i>
+                    <span>Code Workspace</span>
+                </a>
+                <a href="review-history.html" class="sidebar-link active">
+                    <i class="bi bi-clock-history"></i>
+                    <span>Review History</span>
+                </a>
+                <a href="user-profile.html" class="sidebar-link">
+                    <i class="bi bi-person"></i>
+                    <span>My Profile</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer-widget mt-auto">
+                <div class="doodle-note">
+                    Code <br>Insights ♡
+                </div>
+                <div class="plant-laptop-art">
+                    <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 88L26 112H44L48 88H22Z" fill="#F0ECE1"/>
+                        <path d="M35 88C35 60 15 50 10 52C10 68 25 80 35 88Z" fill="#2DD4BF"/>
+                        <path d="M35 88C35 55 52 45 58 48C60 62 48 78 35 88Z" fill="#14B8A6"/>
+                        <path d="M35 88V35C30 35 25 45 35 88Z" fill="#0D9488"/>
+                        <path d="M60 106L72 74H146L154 106H60Z" fill="#2563EB" opacity="0.9"/>
+                        <rect x="74" y="56" width="70" height="46" rx="4" fill="#3B82F6"/>
+                        <rect x="78" y="60" width="62" height="38" rx="2" fill="#0B132B"/>
+                        <path d="M84 75 L90 68 L100 80 L115 62" stroke="#38BDF8" stroke-width="2" fill="none"/>
+                        <rect x="84" y="86" width="45" height="3" rx="1.5" fill="#64748B"/>
+                    </svg>
+                </div>
+            </div>
+        </aside>
+
+        <!-- =======================================================
+             2. Main Content Canvas
+             ======================================================= -->
+        <main class="main-content">
+            
+            <header class="content-header d-flex justify-content-between align-items-center mb-4 pb-2">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="header-shield-badge bg-primary-subtle text-primary">
+                        <i class="bi bi-file-earmark-bar-graph"></i>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h2 class="page-heading mb-0">Analysis Report</h2>
+                            <span class="doodle-sparkle text-primary">✦</span>
+                        </div>
+                        <p class="text-secondary small mb-0">
+                            Detailed breakdown of your code submission.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Avatar Dropdown -->
+                    <div class="dropdown">
+                        <button class="avatar-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="avatar-pill">
+                                <i class="bi bi-person-fill text-primary fs-5"></i>
+                            </div>
+                            <i class="bi bi-chevron-down small text-secondary ms-1"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2">
+                            <li><a class="dropdown-item py-2" href="user-dashboard.html"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+                            <li><button class="dropdown-item py-2 text-danger"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Navigation & Actions Bar -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a href="review-history.html" class="btn btn-light rounded-pill shadow-sm fw-bold text-secondary px-4 py-2 hover-lift">
+                    <i class="bi bi-arrow-left me-2"></i> Back to History
+                </a>
+                <button class="btn btn-danger rounded-pill shadow-sm fw-bold px-4 py-2 hover-lift" id="deleteReportBtn">
+                    <i class="bi bi-trash3 me-2"></i> Delete Report
+                </button>
+            </div>
+
+            <!-- Alert Notification -->
+            <div id="statusAlert" class="alert alert-danger d-none shadow-sm rounded-4 border-0 mb-4" role="alert"></div>
+
+            <!-- Spinner Loader -->
+            <div id="loadingSpinner" class="text-center py-5">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="text-muted mt-2 fw-medium">Loading detailed review report...</p>
+            </div>
+
+            <!-- =======================================================
+                 3. Report Content
+                 ======================================================= -->
+            <div id="reportContent" class="d-none fade-in mb-5">
+
+                <!-- Summary & Quality Score Banner -->
+                <div class="card result-summary-card shadow-sm mb-4 border-0 rounded-4">
+                    <div class="card-body p-4 d-flex flex-column flex-md-row align-items-start align-items-md-center gap-4">
+                        <div class="score-circle d-flex align-items-center justify-content-center flex-shrink-0 text-white fw-bold fs-2 rounded-circle shadow" id="reportScore">
+                            --
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+                                <span class="badge bg-primary-subtle text-primary border border-primary px-3 py-1 rounded-pill fw-bold" id="reportLanguage">--</span>
+                                <span class="badge bg-light text-muted border px-3 py-1 rounded-pill" id="reportTimestamp"><i class="bi bi-clock me-1"></i>--</span>
+                            </div>
+                            <h4 class="fw-bold mb-1 text-dark">Executive Summary</h4>
+                            <p class="mb-0 text-secondary fw-medium">Review the metrics and recommendations below.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs for Details -->
+                <ul class="nav nav-tabs custom-tabs mb-4 border-0" id="reportTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active fw-bold text-danger rounded-pill shadow-sm" id="vuln-tab" data-bs-toggle="tab" data-bs-target="#vuln-pane" type="button" role="tab">
+                            <i class="bi bi-shield-exclamation me-1"></i> Errors & Vulnerabilities
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold text-warning text-dark rounded-pill shadow-sm" id="rec-tab" data-bs-toggle="tab" data-bs-target="#rec-pane" type="button" role="tab">
+                            <i class="bi bi-lightbulb me-1"></i> Recommendations
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold text-success rounded-pill shadow-sm" id="code-tab" data-bs-toggle="tab" data-bs-target="#code-pane" type="button" role="tab">
+                            <i class="bi bi-code-slash me-1"></i> Refactored Code
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="reportTabsContent">
+                    <!-- Tab 1: Syntax & Vulnerabilities -->
+                    <div class="tab-pane fade show active" id="vuln-pane" role="tabpanel">
+                        <div id="syntaxErrorsContainer" class="mb-4"></div>
+                        <div id="securityVulnContainer"></div>
+                    </div>
+
+                    <!-- Tab 2: Recommendations -->
+                    <div class="tab-pane fade" id="rec-pane" role="tabpanel">
+                        <div id="recommendationsContainer"></div>
+                    </div>
+
+                    <!-- Tab 3: Refactored Code -->
+                    <div class="tab-pane fade" id="code-pane" role="tabpanel">
+                        <div class="card editor-window-card text-light border-0 shadow-sm rounded-4 overflow-hidden">
+                            <div class="editor-header d-flex justify-content-between align-items-center py-3 px-4">
+                                <span id="refactoredFileName" class="fw-bold text-info font-monospace fs-6"></span>
+                                <button class="btn btn-sm btn-light rounded-pill px-3 fw-bold text-dark shadow-sm" onclick="copyRefactoredCode()">
+                                    <i class="bi bi-clipboard me-1"></i> Copy Code
+                                </button>
+                            </div>
+                            <div class="editor-body p-0">
+                                <pre class="m-0 p-4"><code id="refactoredCodeBlock" class="text-light fs-6" style="font-family: 'Fira Code', monospace;"></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modern Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-danger-subtle border-0 py-3 px-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                            <i class="bi bi-trash3-fill fs-6"></i>
+                        </div>
+                        <h5 class="modal-title fw-bold text-danger mb-0">Delete Code Review</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4 py-3">
+                    <p class="mb-1 text-dark fw-medium">Are you sure you want to permanently delete this report?</p>
+                    <p class="text-muted small mb-0">This action cannot be undone. All associated vulnerability scans, scores, and refactored code will be removed.</p>
+                </div>
+                <div class="modal-footer border-0 px-4 pb-4 pt-2 d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-light border px-4 fw-semibold" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger px-4 fw-semibold d-flex align-items-center" id="confirmDeleteBtn">
+                        <span class="spinner-border spinner-border-sm me-2 d-none" id="deleteSpinner"></span>
+                        Delete Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modern Notification Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+        <div id="systemToast" class="toast align-items-center border-0 shadow-lg text-white" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2" id="systemToastBody"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/review-report.js"></script>
+</body>
+</html>

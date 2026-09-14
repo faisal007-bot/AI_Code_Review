@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>System Administration | AI Reviewer</title>
+
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom Modern Admin CSS -->
+    <link rel="stylesheet" href="./css/admin-dashboard.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <!-- =======================================================
+             1. Left Navigation Sidebar
+             ======================================================= -->
+        <aside class="sidebar-wrapper">
+            <!-- Brand / Logo -->
+            <div class="sidebar-brand">
+                <div class="brand-icon-shield">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">System Admin</span>
+                    <span class="brand-subtitle">Console v2.0</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="sidebar-link active">
+                    <i class="bi bi-house-door-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#usersSection" class="sidebar-link">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Users</span>
+                </a>
+                <a href="#reviewsSection" class="sidebar-link">
+                    <i class="bi bi-star-fill"></i>
+                    <span>Reviews</span>
+                </a>
+                <a href="code-editor.html" class="sidebar-link">
+                    <i class="bi bi-code-square"></i>
+                    <span>Code Workspace</span>
+                </a>
+                <a href="user-dashboard.html" class="sidebar-link">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>User View</span>
+                </a>
+                <a href="user-profile.html" class="sidebar-link">
+                    <i class="bi bi-gear-fill"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <!-- Bottom Sidebar Illustration Card -->
+            <div class="sidebar-footer-widget">
+                <div class="doodle-note">
+                    Better<br>Systems<br>=<br>Happier Users ♡
+                </div>
+                <div class="plant-laptop-art">
+                    <!-- SVG Plant + Laptop Art -->
+                    <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Plant Pot -->
+                        <path d="M22 88L26 112H44L48 88H22Z" fill="#F0ECE1"/>
+                        <!-- Leaves -->
+                        <path d="M35 88C35 60 15 50 10 52C10 68 25 80 35 88Z" fill="#2DD4BF"/>
+                        <path d="M35 88C35 55 52 45 58 48C60 62 48 78 35 88Z" fill="#14B8A6"/>
+                        <path d="M35 88V35C30 35 25 45 35 88Z" fill="#0D9488"/>
+                        <!-- Laptop Base -->
+                        <path d="M60 106L72 74H146L154 106H60Z" fill="#2563EB" opacity="0.9"/>
+                        <rect x="74" y="56" width="70" height="46" rx="4" fill="#3B82F6"/>
+                        <rect x="78" y="60" width="62" height="38" rx="2" fill="#0B132B"/>
+                        <!-- Code Marks on Screen -->
+                        <text x="84" y="75" fill="#38BDF8" font-family="monospace" font-size="10">&lt;/&gt;</text>
+                        <rect x="84" y="82" width="30" height="3" rx="1.5" fill="#64748B"/>
+                        <rect x="84" y="88" width="45" height="3" rx="1.5" fill="#64748B"/>
+                    </svg>
+                </div>
+            </div>
+        </aside>
+
+        <!-- =======================================================
+             2. Main Content Canvas
+             ======================================================= -->
+        <main class="main-content">
+
+            <!-- Top Header Banner -->
+            <header class="content-header d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="header-shield-badge">
+                        <i class="bi bi-shield-shaded"></i>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h2 class="page-heading mb-0">System Administration</h2>
+                            <span class="doodle-sparkle">✦</span>
+                        </div>
+                        <p class="text-secondary small mb-0">
+                            Manage users, monitor activities and keep your system running smoothly.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Header Actions -->
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Hand-drawn Doodle Note -->
+                    <div class="header-doodle d-none d-xl-flex flex-column align-items-center text-center">
+                        <span class="doodle-text">Stay Secure ♡</span>
+                        <div class="doodle-rays">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-refresh" id="refreshMetricsBtn" title="Refresh Dashboard Telemetry">
+                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh Data
+                    </button>
+
+                    <a href="code-editor.html" class="btn btn-primary-gradient">
+                        <i class="bi bi-plus-lg me-1"></i> Test Engine
+                    </a>
+
+                    <!-- User / Admin Profile Dropdown -->
+                    <div class="dropdown">
+                        <button class="avatar-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="avatar-pill">
+                                <i class="bi bi-person-fill text-primary fs-5"></i>
+                            </div>
+                            <i class="bi bi-chevron-down small text-secondary ms-1"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2">
+                            <li class="px-3 py-2 border-bottom">
+                                <span class="d-block small text-muted">Signed in as</span>
+                                <strong class="small text-dark" id="adminNavEmail">admin@platform.com</strong>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="user-profile.html">
+                                    <i class="bi bi-person me-2 text-primary"></i> Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="user-dashboard.html">
+                                    <i class="bi bi-speedometer2 me-2 text-primary"></i> User View
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li>
+                                <button class="dropdown-item py-2 text-danger" id="logoutBtn">
+                                    <i class="bi bi-box-arrow-right me-2"></i> Sign Out
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <!-- =======================================================
+                 3. Metric Tiles with Sparkline Charts
+                 ======================================================= -->
+            <section class="metrics-grid mb-4">
+                <!-- Card 1: Total Users -->
+                <div class="metric-card metric-blue">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="metric-icon-box bg-blue-subtle">
+                            <i class="bi bi-people-fill text-primary"></i>
+                        </div>
+                        <span class="metric-badge-doodle">✦</span>
+                    </div>
+                    <div class="metric-body mt-3">
+                        <span class="metric-label">Total Users</span>
+                        <h3 class="metric-value mb-0" id="totalUsersCount">--</h3>
+                    </div>
+                    <!-- Blue Sparkline Curve -->
+                    <div class="sparkline-wrap">
+                        <svg viewBox="0 0 120 30" preserveAspectRatio="none">
+                            <path d="M0 25 C 20 22, 40 28, 60 15 C 80 5, 100 12, 120 4" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Card 2: Total Reviews / Active Sessions -->
+                <div class="metric-card metric-mint">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="metric-icon-box bg-mint-subtle">
+                            <i class="bi bi-file-earmark-code-fill text-teal"></i>
+                        </div>
+                        <span class="metric-badge-doodle text-teal">✦</span>
+                    </div>
+                    <div class="metric-body mt-3">
+                        <span class="metric-label">Total Reviews Run</span>
+                        <h3 class="metric-value mb-0" id="totalGlobalReviewsCount">--</h3>
+                    </div>
+                    <!-- Mint Sparkline Curve -->
+                    <div class="sparkline-wrap">
+                        <svg viewBox="0 0 120 30" preserveAspectRatio="none">
+                            <path d="M0 24 C 25 24, 45 15, 70 18 C 95 21, 105 10, 120 6" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Card 3: Platform Avg Score / System Health -->
+                <div class="metric-card metric-purple">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="metric-icon-box bg-purple-subtle">
+                            <i class="bi bi-shield-check text-purple"></i>
+                        </div>
+                        <span class="metric-badge-doodle text-purple">✦</span>
+                    </div>
+                    <div class="metric-body mt-3">
+                        <span class="metric-label">Platform Avg Score</span>
+                        <h3 class="metric-value mb-0" id="platformAvgScore">--</h3>
+                    </div>
+                    <!-- Purple Sparkline Curve -->
+                    <div class="sparkline-wrap">
+                        <svg viewBox="0 0 120 30" preserveAspectRatio="none">
+                            <path d="M0 26 C 25 26, 50 18, 75 22 C 100 26, 110 14, 120 8" fill="none" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Card 4: Platform Status / Last Activity -->
+                <div class="metric-card metric-amber">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="metric-icon-box bg-amber-subtle">
+                            <i class="bi bi-clock-history text-amber"></i>
+                        </div>
+                        <span class="metric-badge-doodle text-amber">✦</span>
+                    </div>
+                    <div class="metric-body mt-3">
+                        <span class="metric-label">System Health</span>
+                        <h3 class="metric-value text-success mb-0" id="systemHealthStatus">Good</h3>
+                    </div>
+                    <!-- Amber Sparkline Curve -->
+                    <div class="sparkline-wrap">
+                        <svg viewBox="0 0 120 30" preserveAspectRatio="none">
+                            <path d="M0 22 C 30 25, 55 12, 80 16 C 100 20, 110 8, 120 5" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =======================================================
+                 4. User Account Management Table Card
+                 ======================================================= -->
+            <section class="admin-panel mb-4" id="usersSection">
+                <div class="panel-header d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="panel-icon-circle bg-blue-subtle">
+                            <i class="bi bi-person text-primary"></i>
+                        </div>
+                        <div>
+                            <h5 class="panel-title mb-0">User Account Management</h5>
+                            <p class="panel-subtitle mb-0">Manage user accounts, roles and permissions across the system.</p>
+                        </div>
+                    </div>
+                    <div class="panel-search-box">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text" class="form-control rounded-pill search-input" id="userSearchInput" placeholder="Search users by name, email or role...">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table modern-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">User</th>
+                                <th>Contact</th>
+                                <th>Role</th>
+                                <th>Primary Stack</th>
+                                <th>Joined Date</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-muted">
+                                    <div class="spinner-border spinner-border-sm text-primary me-2"></div>
+                                    Loading system users...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- =======================================================
+                 5. System Wide Code Reviews Table Card
+                 ======================================================= -->
+            <section class="admin-panel mb-4" id="reviewsSection">
+                <div class="panel-header d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="panel-icon-circle bg-purple-subtle">
+                            <i class="bi bi-code-slash text-purple"></i>
+                        </div>
+                        <div>
+                            <h5 class="panel-title mb-0">System Wide Code Reviews</h5>
+                            <p class="panel-subtitle mb-0">View and manage code reviews across all projects and teams.</p>
+                        </div>
+                    </div>
+                    <div class="panel-search-box">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text" class="form-control rounded-pill search-input" id="reviewSearchInput" placeholder="Search reviews by title, author or status...">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table modern-table align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">Language</th>
+                                <th>Score</th>
+                                <th>Summary</th>
+                                <th>Submitted At</th>
+                                <th class="text-end pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="globalReviewsBody">
+                            <tr>
+                                <td colspan="5" class="text-center py-5 text-muted">
+                                    <div class="spinner-border spinner-border-sm text-primary me-2"></div>
+                                    Loading global reviews...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- =======================================================
+         6. Action Confirmation Modal
+         ======================================================= -->
+    <div class="modal fade" id="adminActionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header bg-danger-subtle border-0 py-3 px-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                            <i class="bi bi-exclamation-triangle-fill fs-6"></i>
+                        </div>
+                        <h5 class="modal-title fw-bold text-danger mb-0" id="modalTitle">Confirm Admin Action</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4 py-3">
+                    <p class="mb-1 text-dark fw-medium" id="modalPrompt">Are you sure you want to proceed?</p>
+                    <p class="text-muted small mb-0" id="modalSubtext">This action performs administrative changes immediately.</p>
+                </div>
+                <div class="modal-footer border-0 px-4 pb-4 pt-2 d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-light border px-4 fw-semibold" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger px-4 fw-semibold d-flex align-items-center" id="confirmModalBtn">
+                        <span class="spinner-border spinner-border-sm me-2 d-none" id="modalSpinner"></span>
+                        Proceed
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+        <div id="adminToast" class="toast align-items-center border-0 shadow-lg text-white" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2" id="adminToastBody"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Admin Dashboard Logic -->
+    <script src="./js/admin-dashboard.js"></script>
+</body>
+
+</html>

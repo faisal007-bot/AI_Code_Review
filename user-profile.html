@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Profile | AI Code Reviewer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/user-profile.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <!-- =======================================================
+             1. Left Navigation Sidebar
+             ======================================================= -->
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <div class="brand-icon-shield">
+                    <i class="bi bi-cpu-fill"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">Developer</span>
+                    <span class="brand-subtitle">Workspace</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="user-dashboard.html" class="sidebar-link">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="code-editor.html" class="sidebar-link">
+                    <i class="bi bi-code-square"></i>
+                    <span>Code Workspace</span>
+                </a>
+                <a href="review-history.html" class="sidebar-link">
+                    <i class="bi bi-clock-history"></i>
+                    <span>Review History</span>
+                </a>
+                <a href="user-profile.html" class="sidebar-link active">
+                    <i class="bi bi-person"></i>
+                    <span>My Profile</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer-widget mt-auto">
+                <div class="doodle-note">
+                    Your Space ♡
+                </div>
+                <div class="plant-laptop-art">
+                    <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 88L26 112H44L48 88H22Z" fill="#F0ECE1"/>
+                        <path d="M35 88C35 60 15 50 10 52C10 68 25 80 35 88Z" fill="#2DD4BF"/>
+                        <path d="M35 88C35 55 52 45 58 48C60 62 48 78 35 88Z" fill="#14B8A6"/>
+                        <path d="M35 88V35C30 35 25 45 35 88Z" fill="#0D9488"/>
+                        <path d="M60 106L72 74H146L154 106H60Z" fill="#2563EB" opacity="0.9"/>
+                        <rect x="74" y="56" width="70" height="46" rx="4" fill="#3B82F6"/>
+                        <rect x="78" y="60" width="62" height="38" rx="2" fill="#0B132B"/>
+                        <path d="M84 75 L90 68 L100 80 L115 62" stroke="#38BDF8" stroke-width="2" fill="none"/>
+                        <rect x="84" y="86" width="45" height="3" rx="1.5" fill="#64748B"/>
+                    </svg>
+                </div>
+            </div>
+        </aside>
+
+        <!-- =======================================================
+             2. Main Content Canvas
+             ======================================================= -->
+        <main class="main-content">
+            
+            <header class="content-header d-flex justify-content-between align-items-center mb-4 pb-2">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="header-shield-badge bg-mint-subtle text-teal">
+                        <i class="bi bi-person-badge"></i>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h2 class="page-heading mb-0">Profile Settings</h2>
+                            <span class="doodle-sparkle text-teal">✦</span>
+                        </div>
+                        <p class="text-secondary small mb-0">
+                            Manage your personal details and career information.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <a href="user-dashboard.html" class="btn btn-light rounded-pill shadow-sm fw-bold text-secondary px-4 py-2 hover-lift">
+                        <i class="bi bi-arrow-left me-2"></i> Dashboard
+                    </a>
+                    <div class="dropdown">
+                        <button class="avatar-dropdown-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="avatar-pill">
+                                <i class="bi bi-person-fill text-primary fs-5"></i>
+                            </div>
+                            <i class="bi bi-chevron-down small text-secondary ms-1"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2">
+                            <li class="px-3 py-2 border-bottom">
+                                <span class="d-block small text-muted">Signed in as</span>
+                                <strong class="small text-dark" id="navUserEmail">user@platform.com</strong>
+                            </li>
+                            <li><button class="dropdown-item py-2 text-danger mt-1" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i> Sign Out</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <div class="row g-4 align-items-stretch mb-4">
+                
+                <!-- =======================================================
+                     3. Left Column: Avatar & Summary
+                     ======================================================= -->
+                <div class="col-12 col-xl-4">
+                    <div class="admin-panel text-center h-100 d-flex flex-column align-items-center py-5">
+                        
+                        <div class="position-relative mb-4 mt-2">
+                            <div class="avatar-circle overflow-hidden shadow-sm d-flex align-items-center justify-content-center bg-primary-subtle position-relative"
+                                id="avatarContainer" style="width: 150px; height: 150px; cursor: pointer;">
+
+                                <i class="bi bi-person-fill text-primary" style="font-size: 5rem;" id="defaultAvatarIcon"></i>
+                                <img id="profileImagePreview" src="" alt="Profile" class="d-none w-100 h-100 object-fit-cover">
+
+                                <div class="avatar-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-50 opacity-0 transition-base">
+                                    <i class="bi bi-camera-fill text-white fs-2"></i>
+                                </div>
+                            </div>
+                            <input type="file" id="profilePhotoInput" accept="image/png, image/jpeg, image/webp" class="d-none">
+                            <span class="position-absolute bottom-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle shadow-sm" style="margin-left: -20px; margin-bottom: 15px;" title="Active">
+                                <span class="visually-hidden">Active</span>
+                            </span>
+                        </div>
+                        
+                        <h3 class="fw-bold mb-1 text-dark" id="summaryName">Loading...</h3>
+                        <p class="text-muted small fw-medium mb-3" id="summaryEmail">user@example.com</p>
+                        
+                        <span class="badge bg-primary-subtle text-primary border border-primary px-4 py-2 rounded-pill fw-bold mb-4 shadow-sm" id="summaryRole">
+                            USER
+                        </span>
+
+                        <div class="w-100 px-3 mt-auto">
+                            <div class="d-flex justify-content-between align-items-center py-3 border-bottom border-light">
+                                <span class="text-muted small"><i class="bi bi-calendar3 me-2"></i>Joined</span>
+                                <span class="fw-bold text-dark small" id="summaryJoinedDate">--</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-3 border-bottom border-light">
+                                <span class="text-muted small"><i class="bi bi-code-slash me-2"></i>Primary Lang</span>
+                                <span class="fw-bold text-dark small" id="summaryPrimaryLang">--</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center py-3">
+                                <span class="text-muted small"><i class="bi bi-shield-check me-2"></i>Status</span>
+                                <span class="fw-bold text-success small">Active</span>
+                            </div>
+                        </div>
+
+                        <!-- Security standing card -->
+                        <div class="w-100 px-3 mt-4 pt-3 border-top border-light text-start">
+                            <span class="text-uppercase text-muted fw-bold small d-block mb-2"><i class="bi bi-shield-lock text-primary me-1"></i> Security Standing</span>
+                            <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded-4 border border-light shadow-sm hover-lift">
+                                <div>
+                                    <span class="d-block fw-bold text-dark small">AI Reviewer Active</span>
+                                    <small class="text-muted" style="font-size: 0.75rem;">Standard compliance protocols active</small>
+                                </div>
+                                <i class="bi bi-patch-check-fill text-success fs-3"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- =======================================================
+                     4. Right Column: Settings Form
+                     ======================================================= -->
+                <div class="col-12 col-xl-8">
+                    <form id="profileForm" novalidate class="h-100">
+                        <div class="admin-panel h-100 d-flex flex-column">
+                            
+                            <!-- Personal Details Section -->
+                            <h5 class="fw-bold mb-4 text-dark border-bottom pb-3">
+                                <i class="bi bi-person-lines-fill text-primary me-2"></i>Personal Details
+                            </h5>
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase" for="name">Full Name</label>
+                                    <input type="text" class="form-control form-control-lg bg-light" id="name" required>
+                                    <div class="invalid-feedback">Full name is required.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase" for="email">Email Address</label>
+                                    <input type="email" class="form-control form-control-lg bg-light" id="email" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase" for="contact">Contact Number</label>
+                                    <input type="tel" class="form-control form-control-lg bg-light" id="contact" maxlength="10" required>
+                                    <div class="invalid-feedback">Please enter a valid 10-digit number.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase" for="dob">Date of Birth</label>
+                                    <div class="input-group input-group-lg has-validation">
+                                        <input type="text" class="form-control bg-light" id="dob" placeholder="DD/MM/YYYY" maxlength="10" required>
+                                        <span class="input-group-text bg-light text-muted"><i class="bi bi-calendar-event"></i></span>
+                                        <div class="invalid-feedback">Valid format: DD/MM/YYYY.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Academic & Career Section -->
+                            <h5 class="fw-bold mb-4 mt-2 text-dark border-bottom pb-3">
+                                <i class="bi bi-mortarboard-fill text-teal me-2"></i>Academic & Career Details
+                            </h5>
+                            <div class="row g-4 mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase" for="institution">Company / University</label>
+                                    <input type="text" class="form-control form-control-lg bg-light" id="institution" placeholder="e.g., University of Mumbai">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase" for="course">Specialization</label>
+                                    <input type="text" class="form-control form-control-lg bg-light" id="course" placeholder="e.g., Software Engineering">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase">Primary Language</label>
+                                    <input type="hidden" id="primaryLanguage" value="Java">
+                                    <div class="dropdown w-100" id="primaryLangWrapper">
+                                        <button class="btn btn-light w-100 d-flex justify-content-between align-items-center custom-profile-dropdown-btn py-2 px-3 fw-bold border form-control-lg" type="button" id="primaryLangBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span id="selectedPrimaryLang"><i class="bi bi-filetype-java me-2 text-primary"></i>Java</span>
+                                            <i class="bi bi-chevron-down small text-muted"></i>
+                                        </button>
+                                        <ul class="dropdown-menu w-100 p-2 shadow-lg border-0 custom-profile-dropdown-menu" aria-labelledby="primaryLangBtn">
+                                            <li><a class="dropdown-item custom-profile-item rounded-2 active-item" href="#" data-value="Java"><i class="bi bi-filetype-java me-2"></i>Java</a></li>
+                                            <li><a class="dropdown-item custom-profile-item rounded-2" href="#" data-value="Python"><i class="bi bi-filetype-py me-2 text-warning"></i>Python</a></li>
+                                            <li><a class="dropdown-item custom-profile-item rounded-2" href="#" data-value="C++"><i class="bi bi-filetype-raw me-2 text-secondary"></i>C++</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase">Experience Level</label>
+                                    <input type="hidden" id="experienceLevel" value="Student">
+                                    <div class="dropdown w-100" id="experienceWrapper">
+                                        <button class="btn btn-light w-100 d-flex justify-content-between align-items-center custom-profile-dropdown-btn py-2 px-3 fw-bold border form-control-lg" type="button" id="experienceBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span id="selectedExperience"><i class="bi bi-mortarboard me-2 text-teal"></i>Student</span>
+                                            <i class="bi bi-chevron-down small text-muted"></i>
+                                        </button>
+                                        <ul class="dropdown-menu w-100 p-2 shadow-lg border-0 custom-profile-dropdown-menu" aria-labelledby="experienceBtn">
+                                            <li><a class="dropdown-item custom-profile-item rounded-2 active-item" href="#" data-value="Student"><i class="bi bi-mortarboard me-2"></i>Student</a></li>
+                                            <li><a class="dropdown-item custom-profile-item rounded-2" href="#" data-value="Intermediate"><i class="bi bi-code-slash me-2 text-primary"></i>Intermediate Developer</a></li>
+                                            <li><a class="dropdown-item custom-profile-item rounded-2" href="#" data-value="Professional"><i class="bi bi-award me-2 text-warning"></i>Professional Engineer</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-muted small text-uppercase" for="githubUrl">GitHub / Portfolio URL</label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text bg-light text-muted"><i class="bi bi-github"></i></span>
+                                        <input type="url" class="form-control bg-light" id="githubUrl" placeholder="https://github.com/your-username">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-auto pt-4 border-top border-light">
+                                <button type="submit" class="btn btn-primary-gradient px-5 py-3 fw-bold rounded-pill shadow-sm mt-3" id="saveProfileBtn">
+                                    <span id="saveSpinner" class="spinner-border spinner-border-sm d-none me-2" role="status"></span>
+                                    <i class="bi bi-floppy me-2"></i> Update Profile
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- =======================================================
+                 5. Bottom Section: Developer Activity & Achievements
+                 ======================================================= -->
+            <div class="row g-4 align-items-stretch mb-5">
+                
+                <!-- Developer Achievements Badges -->
+                <div class="col-12 col-xl-4">
+                    <div class="admin-panel h-100 d-flex flex-column">
+                        <h5 class="fw-bold mb-4 text-dark border-bottom pb-3">
+                            <i class="bi bi-trophy-fill text-warning me-2"></i>Achievements
+                        </h5>
+                        <div class="d-flex flex-column gap-3 flex-grow-1">
+                            <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-4 border border-light shadow-sm hover-lift">
+                                <div class="bg-warning-subtle text-warning d-flex align-items-center justify-content-center rounded-3 fs-4" style="width: 48px; height: 48px;">
+                                    <i class="bi bi-bug-fill"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold text-dark">Bug Hunter</h6>
+                                    <small class="text-muted" style="font-size: 0.8rem;">Found 50+ critical bugs</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-4 border border-light shadow-sm hover-lift">
+                                <div class="bg-success-subtle text-success d-flex align-items-center justify-content-center rounded-3 fs-4" style="width: 48px; height: 48px;">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold text-dark">Security Sentinel</h6>
+                                    <small class="text-muted" style="font-size: 0.8rem;">Zero vulnerabilities deployed</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-4 border border-light shadow-sm hover-lift">
+                                <div class="bg-primary-subtle text-primary d-flex align-items-center justify-content-center rounded-3 fs-4" style="width: 48px; height: 48px;">
+                                    <i class="bi bi-lightning-fill"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold text-dark">Fast Reviewer</h6>
+                                    <small class="text-muted" style="font-size: 0.8rem;">Avg. turnaround < 2 hrs</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Activity Heatmap -->
+                <div class="col-12 col-xl-8">
+                    <div class="admin-panel h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+                            <h5 class="fw-bold mb-0 text-dark">
+                                <i class="bi bi-activity text-primary me-2"></i>Review Activity
+                            </h5>
+                            <span class="badge bg-light text-muted border rounded-pill px-3 py-1 shadow-sm">Last 90 Days</span>
+                        </div>
+                        
+                        <div class="flex-grow-1 d-flex flex-column justify-content-center">
+                            
+                            <!-- Custom Heatmap Grid -->
+                            <div class="activity-graph-container w-100 overflow-hidden mb-3">
+                                <div class="heatmap-grid" id="mockHeatmap">
+                                    <!-- A stylized HTML/CSS grid simulating contribution blocks -->
+                                    <div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-2"></div><div class="heat-box heat-1"></div><div class="heat-box heat-3"></div><div class="heat-box heat-0"></div><div class="heat-box heat-2"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-3"></div><div class="heat-box heat-4"></div><div class="heat-box heat-2"></div><div class="heat-box heat-0"></div><div class="heat-box heat-0"></div>
+                                    <div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-2"></div><div class="heat-box heat-3"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-4"></div><div class="heat-box heat-2"></div><div class="heat-box heat-0"></div><div class="heat-box heat-2"></div><div class="heat-box heat-3"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-2"></div>
+                                    <div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-3"></div><div class="heat-box heat-4"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-2"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-3"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-2"></div><div class="heat-box heat-4"></div><div class="heat-box heat-3"></div><div class="heat-box heat-0"></div>
+                                    <div class="heat-box heat-2"></div><div class="heat-box heat-3"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-2"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-3"></div><div class="heat-box heat-4"></div><div class="heat-box heat-2"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-2"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-3"></div>
+                                    <div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-2"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-3"></div><div class="heat-box heat-2"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-2"></div><div class="heat-box heat-4"></div><div class="heat-box heat-3"></div><div class="heat-box heat-1"></div><div class="heat-box heat-0"></div><div class="heat-box heat-1"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-light">
+                                <div class="text-muted small d-flex align-items-center gap-1">
+                                    Less 
+                                    <span class="heat-box heat-0 ms-1" style="width: 12px; height: 12px;"></span>
+                                    <span class="heat-box heat-1" style="width: 12px; height: 12px;"></span>
+                                    <span class="heat-box heat-2" style="width: 12px; height: 12px;"></span>
+                                    <span class="heat-box heat-3" style="width: 12px; height: 12px;"></span>
+                                    <span class="heat-box heat-4 me-1" style="width: 12px; height: 12px;"></span> 
+                                    More
+                                </div>
+                                <div class="fw-bold text-dark small">124 Reviews in 2026</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modern Notification Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+        <div id="profileToast" class="toast align-items-center border-0 shadow-lg text-white" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2" id="toastMessage"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/user-profile.js"></script>
+</body>
+
+</html>
