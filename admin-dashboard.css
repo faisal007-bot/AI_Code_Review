@@ -1,0 +1,769 @@
+/* =======================================================
+   Modern SaaS Layout Design Tokens & Physics
+   ======================================================= */
+:root {
+    --bg-canvas: #f2f6fc;
+    --sidebar-bg: #0b132b;
+    --sidebar-link: #8d99ae;
+    --sidebar-link-hover: #ffffff;
+    --primary-blue: #2563eb;
+    --primary-blue-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --card-radius: 20px;
+    --card-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    
+    /* Animation Physics */
+    --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --spring-snappy: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body {
+    background-color: var(--bg-canvas);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* =======================================================
+   Two-Column App Grid Structure
+   ======================================================= */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Left Fixed Sidebar */
+.sidebar-wrapper {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 1.5rem;
+}
+
+/* Reactive Brand Icon */
+.brand-icon-shield {
+    width: 42px;
+    height: 42px;
+    background: var(--primary-blue-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    transition: transform 0.4s var(--spring-bounce);
+    cursor: pointer;
+}
+
+.sidebar-brand:hover .brand-icon-shield {
+    transform: scale(1.15) rotate(-8deg);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-title {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.05rem;
+    line-height: 1.2;
+}
+
+.brand-subtitle {
+    font-size: 0.72rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Poppy Sidebar Navigation */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex-grow: 1;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    color: var(--sidebar-link);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: all 0.3s var(--spring-bounce);
+}
+
+.sidebar-link i {
+    font-size: 1.15rem;
+    transition: transform 0.3s var(--spring-bounce);
+}
+
+.sidebar-link:hover {
+    color: var(--sidebar-link-hover);
+    background-color: rgba(255, 255, 255, 0.06);
+    transform: translateX(6px);
+}
+
+.sidebar-link:hover i {
+    transform: scale(1.2) rotate(10deg);
+    color: #38bdf8;
+}
+
+.sidebar-link.active {
+    background: var(--primary-blue-gradient);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+.sidebar-link.active:hover {
+    transform: translateX(4px) scale(1.02);
+}
+
+.sidebar-link.active i {
+    color: #ffffff !important;
+}
+
+.sidebar-footer-widget {
+    margin-top: auto;
+    padding-top: 1rem;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    transition: transform 0.4s var(--spring-bounce);
+}
+
+.sidebar-footer-widget:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+.doodle-note {
+    font-family: 'Caveat', cursive;
+    color: #94a3b8;
+    font-size: 1.1rem;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+    padding-left: 0.25rem;
+    transition: color 0.3s ease;
+}
+
+.sidebar-footer-widget:hover .doodle-note {
+    color: #38bdf8;
+}
+
+/* =======================================================
+   Main Content Canvas & Top Header
+   ======================================================= */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 2.5rem;
+    overflow-x: hidden;
+}
+
+.header-shield-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: #e0edff;
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: transform 0.4s var(--spring-snappy), background-color 0.3s;
+}
+
+.content-header:hover .header-shield-badge {
+    transform: scale(1.1) rotate(5deg);
+    background: #dbeafe;
+}
+
+.page-heading {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0f172a;
+}
+
+/* Interactive Header Buttons */
+.btn-refresh {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-weight: 600;
+    padding: 0.65rem 1.15rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s var(--spring-bounce);
+}
+
+.btn-refresh:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.btn-refresh:hover i {
+    display: inline-block;
+    animation: spinIcon 1s linear infinite;
+}
+
+@keyframes spinIcon {
+    100% { transform: rotate(360deg); }
+}
+
+.btn-primary-gradient {
+    background: var(--primary-blue-gradient);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.65rem 1.35rem;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s var(--spring-bounce);
+}
+
+.btn-primary-gradient:hover {
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+}
+
+/* Click "Squish" Physics */
+.btn-refresh:active, .btn-primary-gradient:active, .avatar-dropdown-btn:active {
+    transform: translateY(1px) scale(0.95);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+}
+
+/* =======================================================
+   Dropdown Menu & Avatar Physics
+   ======================================================= */
+.avatar-dropdown-btn {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    padding: 4px 10px 4px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s var(--spring-bounce);
+}
+
+.avatar-dropdown-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15);
+    border-color: #93c5fd;
+}
+
+.avatar-pill {
+    width: 36px;
+    height: 36px;
+    background: #eff6ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s var(--spring-bounce);
+}
+
+.avatar-dropdown-btn:hover .avatar-pill {
+    transform: scale(1.1);
+    background: #dbeafe;
+}
+
+/* Dropdown Menu Popup Animation */
+.dropdown-menu {
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    padding: 0.5rem;
+    border-radius: 16px;
+}
+
+.dropdown-menu.show {
+    animation: menuPop 0.4s var(--spring-bounce);
+    transform-origin: top right;
+}
+
+@keyframes menuPop {
+    0% { opacity: 0; transform: scale(0.9) translateY(-10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Dropdown Items Hover Effects */
+.dropdown-item {
+    transition: all 0.3s var(--spring-bounce);
+    border-radius: 8px;
+    margin: 2px 8px;
+    width: calc(100% - 16px);
+    font-weight: 500;
+    color: #475569;
+    padding: 0.6rem 1rem;
+}
+
+.dropdown-item i {
+    transition: transform 0.3s var(--spring-bounce);
+}
+
+.dropdown-item:hover {
+    background-color: #eff6ff;
+    color: var(--primary-blue);
+    transform: translateX(5px) scale(1.02);
+}
+
+.dropdown-item:hover i {
+    transform: scale(1.25);
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #fef2f2;
+    color: #dc2626 !important;
+}
+
+/* =======================================================
+   Poppy Metric Grid & Sparkline Cards
+   ======================================================= */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
+}
+
+.metric-card {
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    padding: 1.35rem 1.4rem 1rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: all 0.4s var(--spring-bounce);
+    cursor: pointer;
+}
+
+.metric-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+}
+
+.metric-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: all 0.4s var(--spring-bounce);
+}
+
+/* Icon Pop on Card Hover */
+.metric-card:hover .metric-icon-box {
+    transform: scale(1.15) rotate(8deg);
+}
+
+.metric-badge-doodle {
+    transition: transform 0.4s var(--spring-bounce);
+}
+.metric-card:hover .metric-badge-doodle {
+    transform: scale(1.3) rotate(45deg);
+}
+
+.bg-blue-subtle { background-color: #eff6ff !important; }
+.bg-mint-subtle { background-color: #ecfdf5 !important; }
+.bg-purple-subtle { background-color: #f5f3ff !important; }
+.bg-amber-subtle { background-color: #fffbeb !important; }
+
+.text-teal { color: #10b981 !important; }
+.text-purple { color: #8b5cf6 !important; }
+.text-amber { color: #f59e0b !important; }
+
+.metric-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.metric-value {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    transition: transform 0.3s ease;
+}
+
+.sparkline-wrap {
+    margin-top: 0.75rem;
+    height: 28px;
+    width: 100%;
+}
+.sparkline-wrap svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* =======================================================
+   Modern Admin Panels & Reactive Tables
+   ======================================================= */
+.admin-panel {
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    transition: all 0.4s var(--spring-bounce);
+}
+
+/* Panel Hover Physics & Color Shift */
+.admin-panel:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.08); 
+    border-color: #bfdbfe; 
+    background-color: #f8fafc; 
+}
+
+.panel-icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: transform 0.4s var(--spring-bounce);
+}
+
+.admin-panel:hover .panel-icon-circle {
+    transform: scale(1.15) rotate(-10deg);
+}
+
+/* =======================================================
+   Reactive Search Boxes
+   ======================================================= */
+.panel-search-box {
+    position: relative;
+    min-width: 300px;
+}
+
+.panel-search-box .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 0.9rem;
+    transition: all 0.4s var(--spring-bounce);
+}
+
+.panel-search-box .search-input {
+    padding-left: 2.35rem;
+    padding-right: 1.25rem;
+    font-size: 0.86rem;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    transition: all 0.4s var(--spring-bounce);
+}
+
+/* Search Box Hover & Focus Physics */
+.panel-search-box .search-input:hover {
+    background-color: #ffffff;
+    border-color: #93c5fd;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.panel-search-box:hover .search-icon {
+    color: var(--primary-blue);
+    transform: translateY(-50%) scale(1.2);
+}
+
+.panel-search-box .search-input:focus {
+    background-color: #ffffff;
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    transform: scale(1.03);
+}
+
+.panel-search-box .search-input:focus + .search-icon,
+.panel-search-box:focus-within .search-icon {
+    color: var(--primary-blue);
+    transform: translateY(-50%) scale(1.2);
+}
+
+/* Poppy Data Table */
+/* =======================================================
+   Poppy Data Table & Reactive Rows
+   ======================================================= */
+.modern-table {
+    border-collapse: separate;
+    border-spacing: 0 6px; /* Adds physical gaps between rows */
+    margin-top: -6px;
+}
+
+.modern-table thead th {
+    background-color: transparent; 
+    color: #475569;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    border: none;
+    padding: 0.85rem 1rem 0.25rem;
+}
+
+/* Base Row State */
+.modern-table tbody tr {
+    background-color: #ffffff; /* Base row color */
+    transition: all 0.4s var(--spring-bounce);
+    position: relative;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03); /* Subtle resting shadow */
+    border-radius: 12px;
+}
+
+/* Override Bootstrap's opaque cells so the row background shows through */
+.modern-table tbody td {
+    background-color: transparent !important; 
+    border: none !important; /* Remove harsh bootstrap borders */
+    padding: 1.1rem 1rem;
+    color: #334155;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+/* Round the edges of the cells to match the row */
+.modern-table tbody td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+.modern-table tbody td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* 🌟 Table Row Hover Physics & Color Shift */
+.modern-table tbody tr:hover {
+    background-color: #eff6ff !important; /* Soft blue highlight */
+    transform: scale(1.015) translateY(-3px); /* Lifts and scales up */
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12); /* Blue glowing shadow */
+    z-index: 10;
+}
+
+/* Table Action Buttons Pop */
+.modern-table .btn-group .btn {
+    transition: all 0.3s var(--spring-bounce);
+    background-color: #ffffff;
+}
+
+.modern-table tbody tr:hover .btn-group .btn {
+    border-color: #bfdbfe; /* Buttons adapt to the blue row */
+}
+
+/* Force text and icon to be visible on hover */
+.modern-table .btn-group .btn-outline-primary:hover {
+    background-color: var(--primary-blue) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-blue) !important;
+}
+
+.modern-table .btn-group .btn-outline-danger:hover {
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+    border-color: #dc2626 !important;
+}
+
+.modern-table .btn-group .btn:hover {
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.modern-table .btn-group .btn:active {
+    transform: scale(0.9);
+}
+
+/* =======================================================
+   Reactive Modals & Popups
+   ======================================================= */
+/* 1. Modal Entry Spring Animation */
+.modal.show .modal-dialog {
+    animation: springModal 0.5s var(--spring-bounce) forwards;
+}
+
+@keyframes springModal {
+    0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Modal Shadow & Corners */
+.modal-content {
+    border-radius: var(--card-radius) !important;
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.15) !important;
+    border: none !important;
+}
+
+/* 2. Modal Buttons Hover & Squish Physics */
+.modal-footer .btn {
+    transition: all 0.3s var(--spring-bounce);
+    border-radius: 10px;
+}
+
+/* Cancel Button */
+.modal-footer .btn-light {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+}
+
+.modal-footer .btn-light:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+}
+
+/* Proceed (Danger) Button */
+.modal-footer .btn-danger {
+    background-color: #ef4444;
+    border: none;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.modal-footer .btn-danger:hover {
+    background-color: #dc2626;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+}
+
+/* Click "Squish" Physics */
+.modal-footer .btn:active {
+    transform: scale(0.92) translateY(2px) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+/* 3. Header Playful Interactions */
+/* Rotate Close Button on Hover */
+.modal-header .btn-close {
+    transition: transform 0.4s var(--spring-bounce);
+}
+
+.modal-header .btn-close:hover {
+    transform: rotate(90deg) scale(1.2);
+}
+
+/* Gentle Pulse on the Warning Icon */
+.modal-header .rounded-circle {
+    animation: pulseWarning 2s infinite alternate ease-in-out;
+}
+
+/* =======================================================
+   Reactive Toast Notifications (Spring Physics)
+   ======================================================= */
+.toast-container {
+    padding: 2rem !important; 
+    z-index: 9999 !important;
+}
+
+.custom-saas-toast {
+    border-radius: 16px !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-clip: padding-box;
+    transition: transform 0.4s var(--spring-bounce), box-shadow 0.4s ease;
+}
+
+/* Hover Physics for the Toast Box */
+.custom-saas-toast:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 48px rgba(15, 23, 42, 0.3) !important;
+}
+
+/* Spring Entrance Animation */
+.custom-saas-toast.show {
+    animation: toastPopIn 0.5s var(--spring-bounce) forwards;
+}
+
+@keyframes toastPopIn {
+    0% { transform: scale(0.7) translateY(50px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Toast Body Text */
+.custom-saas-toast .toast-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 1.25rem 1.5rem !important;
+}
+
+/* Bouncy Icon Pop Animation */
+.custom-saas-toast .toast-body i {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    animation: iconPop 0.7s var(--spring-bounce) forwards;
+    animation-delay: 0.15s; /* Staggered pop effect */
+    opacity: 0;
+    transform: scale(0);
+}
+
+@keyframes iconPop {
+    0% { transform: scale(0) rotate(-25deg); opacity: 0; }
+    80% { transform: scale(1.4) rotate(10deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Close Button Playful Rotation */
+.custom-saas-toast .btn-close {
+    transition: transform 0.4s var(--spring-bounce);
+    opacity: 0.8;
+    margin-right: 0.5rem;
+}
+
+.custom-saas-toast .btn-close:hover {
+    transform: rotate(90deg) scale(1.3);
+    opacity: 1;
+}
+
+@keyframes pulseWarning {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    100% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+}
+
+/* =======================================================
+   Responsive
+   ======================================================= */
+@media (max-width: 991px) {
+    .sidebar-wrapper { display: none; }
+    .main-content { padding: 1.25rem; }
+}

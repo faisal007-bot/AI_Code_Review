@@ -1,0 +1,419 @@
+/* =======================================================
+   SaaS Layout Design Tokens & Physics
+   ======================================================= */
+:root {
+    --bg-canvas: #f2f6fc;
+    --sidebar-bg: #0b132b;
+    --sidebar-link: #8d99ae;
+    --sidebar-link-hover: #ffffff;
+    --primary-blue: #2563eb;
+    --primary-blue-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --card-radius: 20px;
+    --card-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    
+    /* Animation Physics */
+    --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --spring-snappy: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body {
+    background-color: var(--bg-canvas);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* =======================================================
+   Two-Column App Grid Structure
+   ======================================================= */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar-wrapper {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 1.5rem;
+}
+
+.brand-icon-shield {
+    width: 42px;
+    height: 42px;
+    background: var(--primary-blue-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    transition: transform 0.4s var(--spring-bounce);
+    cursor: pointer;
+}
+.sidebar-brand:hover .brand-icon-shield { transform: scale(1.15) rotate(-8deg); }
+
+.brand-text { display: flex; flex-direction: column; }
+.brand-title { font-weight: 700; color: #ffffff; font-size: 1.05rem; line-height: 1.2; }
+.brand-subtitle { font-size: 0.72rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    color: var(--sidebar-link);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: all 0.3s var(--spring-bounce);
+}
+
+.sidebar-link i { font-size: 1.15rem; transition: transform 0.3s var(--spring-bounce); }
+.sidebar-link:hover { color: var(--sidebar-link-hover); background-color: rgba(255, 255, 255, 0.06); transform: translateX(6px); }
+.sidebar-link:hover i { transform: scale(1.2) rotate(10deg); color: #38bdf8; }
+
+.sidebar-link.active {
+    background: var(--primary-blue-gradient);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+.sidebar-link.active i { color: #ffffff !important; }
+.sidebar-link.active:hover { transform: translateX(4px) scale(1.02); }
+
+.sidebar-footer-widget {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 1rem;
+    transition: transform 0.4s var(--spring-bounce);
+}
+.sidebar-footer-widget:hover { transform: translateY(-4px) scale(1.02); }
+.doodle-note { font-family: 'Caveat', cursive; color: #94a3b8; font-size: 1.2rem; line-height: 1.15; margin-bottom: 0.5rem; transition: color 0.3s ease; }
+.sidebar-footer-widget:hover .doodle-note { color: #38bdf8; }
+.plant-laptop-art svg { width: 100%; height: auto; display: block; }
+
+/* =======================================================
+   Main Content Canvas & Header
+   ======================================================= */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 2.5rem;
+    overflow-x: hidden;
+}
+
+.header-shield-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: transform 0.4s var(--spring-snappy), background-color 0.3s;
+}
+.bg-mint-subtle { background-color: #ecfdf5 !important; }
+.text-teal { color: #10b981 !important; }
+.content-header:hover .header-shield-badge { transform: scale(1.1) rotate(5deg); background-color: #d1fae5 !important; }
+.page-heading { font-size: 1.65rem; font-weight: 800; letter-spacing: -0.02em; color: #0f172a; }
+
+/* Dropdown Menu & Avatar */
+.avatar-dropdown-btn {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    padding: 4px 10px 4px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s var(--spring-bounce);
+}
+.avatar-dropdown-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15); border-color: #93c5fd; }
+.avatar-pill {
+    width: 36px;
+    height: 36px;
+    background: #eff6ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s var(--spring-bounce);
+}
+.avatar-dropdown-btn:hover .avatar-pill { transform: scale(1.1); background: #dbeafe; }
+
+.dropdown-menu {
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    padding: 0.5rem;
+    border-radius: 16px;
+    z-index: 1050 !important;
+}
+.dropdown-menu.show { animation: menuPop 0.4s var(--spring-bounce); transform-origin: top right; }
+.dropdown-item { transition: all 0.3s var(--spring-bounce); border-radius: 8px; margin: 2px 8px; width: calc(100% - 16px); font-weight: 500; padding: 0.6rem 1rem; }
+.dropdown-item i { transition: transform 0.3s var(--spring-bounce); }
+.dropdown-item:hover { background-color: #eff6ff; color: var(--primary-blue); transform: translateX(5px) scale(1.02); }
+.dropdown-item:hover i { transform: scale(1.25); }
+.dropdown-item.text-danger:hover { background-color: #fef2f2; color: #dc2626 !important; }
+
+/* Action Buttons */
+.hover-lift { transition: all 0.4s var(--spring-bounce); }
+.hover-lift:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08) !important; }
+.hover-lift:active { transform: translateY(1px) scale(0.95); box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; }
+
+/* =======================================================
+   Cards & Profile Avatar Physics
+   ======================================================= */
+.admin-panel {
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    transition: all 0.4s var(--spring-bounce);
+}
+.admin-panel:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+}
+
+.avatar-circle {
+    transition: transform 0.4s var(--spring-bounce), box-shadow 0.3s ease;
+    border-radius: 50%;
+}
+.avatar-circle:hover {
+    transform: scale(1.08) rotate(4deg);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.25);
+}
+.avatar-overlay { transition: opacity 0.3s ease-in-out; border-radius: 50%; }
+.avatar-circle:hover .avatar-overlay { opacity: 1 !important; }
+
+/* =======================================================
+   Form Inputs & Dropdowns
+   ======================================================= */
+.form-control, .input-group-text {
+    transition: all 0.4s var(--spring-bounce) !important;
+    border-radius: 12px;
+    border-color: #e2e8f0;
+}
+
+.form-control:not([readonly]):hover,
+.input-group:hover .form-control:not([readonly]),
+.input-group:hover .input-group-text {
+    border-color: #93c5fd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+}
+
+.form-control:not([readonly]):focus {
+    transform: translateY(-3px) scale(1.02);
+    border-color: #3b82f6 !important;
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15) !important;
+    background-color: #ffffff !important;
+}
+
+.input-group:focus-within {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+    border-radius: 12px;
+}
+.input-group:focus-within .input-group-text {
+    background-color: #eff6ff;
+    color: var(--primary-blue);
+    border-color: #3b82f6;
+}
+.input-group:focus-within .form-control { border-color: #3b82f6; box-shadow: none !important; }
+
+/* Custom Profile Dropdowns */
+.custom-profile-dropdown-btn {
+    border-color: #e2e8f0;
+    border-radius: 12px;
+    transition: all 0.4s var(--spring-bounce) !important;
+}
+.custom-profile-dropdown-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    border-color: #93c5fd !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.15) !important;
+}
+.custom-profile-dropdown-btn:focus,
+.custom-profile-dropdown-btn[aria-expanded="true"] {
+    transform: scale(1.03);
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15) !important;
+    background-color: #ffffff !important;
+}
+.custom-profile-item { transition: all 0.3s var(--spring-bounce); }
+.custom-profile-item:hover { transform: translateX(5px) scale(1.02); }
+
+/* =======================================================
+   Primary Update Button (Centered at Bottom)
+   ======================================================= */
+.btn-primary-gradient {
+    background: var(--primary-blue-gradient);
+    color: #ffffff;
+    border: none;
+    transition: all 0.4s var(--spring-bounce);
+}
+.btn-primary-gradient:hover {
+    color: #ffffff;
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.4);
+}
+.btn-primary-gradient:active {
+    transform: translateY(1px) scale(0.95);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+@media (max-width: 1199px) {
+    /* Stop forcing height matching on smaller screens when they stack */
+    .row.align-items-stretch .admin-panel { height: auto !important; }
+}
+
+@media (max-width: 991px) {
+    .sidebar-wrapper { display: none; }
+    .main-content { padding: 1.25rem; }
+}
+
+/* =======================================================
+   Developer Activity Heatmap & Badges
+   ======================================================= */
+.heatmap-grid {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-auto-flow: column;
+    gap: 8px;
+    padding: 10px 0;
+    justify-content: space-between;
+}
+
+.heat-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    background-color: #f1f5f9; /* heat-0 default */
+    transition: transform 0.2s var(--spring-bounce), box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.heat-box:hover {
+    transform: scale(1.3) translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 10;
+    position: relative;
+}
+
+/* GitHub-Style Contribution Colors mapped to our Theme Blue */
+.heat-box.heat-0 { background-color: #f1f5f9; }
+.heat-box.heat-1 { background-color: #bfdbfe; }
+.heat-box.heat-2 { background-color: #60a5fa; }
+.heat-box.heat-3 { background-color: #3b82f6; }
+.heat-box.heat-4 { background-color: #1d4ed8; }
+
+/* Adjustments for smaller screens on the heatmap */
+@media (max-width: 1400px) {
+    .heat-box {
+        width: 18px;
+        height: 18px;
+    }
+}
+@media (max-width: 1200px) {
+    .heatmap-grid {
+        gap: 4px;
+        justify-content: start;
+        overflow-x: auto;
+    }
+}
+
+/* =======================================================
+   Reactive Toast Notifications (Spring Physics)
+   ======================================================= */
+.toast-container {
+    padding: 2rem !important; /* Move away from extreme screen edges */
+    z-index: 9999 !important;
+}
+
+.custom-saas-toast {
+    border-radius: 16px !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-clip: padding-box;
+    transition: transform 0.4s var(--spring-bounce), box-shadow 0.4s ease;
+}
+
+/* Hover Physics for the Toast Box */
+.custom-saas-toast:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 48px rgba(15, 23, 42, 0.3) !important;
+}
+
+/* Spring Entrance Animation */
+.custom-saas-toast.show {
+    animation: toastPopIn 0.5s var(--spring-bounce) forwards;
+}
+
+@keyframes toastPopIn {
+    0% { transform: scale(0.7) translateY(50px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Toast Body Text */
+.custom-saas-toast .toast-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 1.25rem 1.5rem !important;
+}
+
+/* Bouncy Icon Pop Animation */
+.custom-saas-toast .toast-body i {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    animation: iconPop 0.7s var(--spring-bounce) forwards;
+    animation-delay: 0.15s; /* Staggered pop effect */
+    opacity: 0;
+    transform: scale(0);
+}
+
+@keyframes iconPop {
+    0% { transform: scale(0) rotate(-25deg); opacity: 0; }
+    80% { transform: scale(1.4) rotate(10deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Close Button Playful Rotation */
+.custom-saas-toast .btn-close {
+    transition: transform 0.4s var(--spring-bounce);
+    opacity: 0.8;
+    margin-right: 0.5rem;
+}
+
+.custom-saas-toast .btn-close:hover {
+    transform: rotate(90deg) scale(1.3);
+    opacity: 1;
+}

@@ -1,0 +1,357 @@
+/* =======================================================
+   SaaS Auth Design Tokens & Physics
+   ======================================================= */
+:root {
+    --primary-blue: #2563eb;
+    --primary-blue-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --card-radius: 24px;
+    
+    /* Extreme Spring Physics */
+    --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --spring-snappy: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =======================================================
+   Security / Cyber Grid Background
+   ======================================================= */
+body.auth-bg {
+    /* Base fallback color */
+    background-color: #0b1120; 
+    
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #0f172a;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 1. The Blurred Background Image Layer */
+body.auth-bg::before {
+    content: "";
+    position: fixed; /* Locks to screen */
+    /* Oversize by 20px to hide the white borders caused by blurring */
+    top: -20px; left: -20px; right: -20px; bottom: -20px; 
+    
+    background-image: url('../images/fluid.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* The Blur Effect (Increase or decrease this px value to change intensity) */
+    filter: blur(8px); 
+    
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 2. The Dark Contrast Overlay & Pulse Layer */
+body.auth-bg::after {
+    content: "";
+    position: fixed; 
+    top: 0; left: 0; right: 0; bottom: 0;
+    
+    /* Combines the dark gradient overlay and the cyan radial pulse */
+    background: 
+        linear-gradient(135deg, rgba(11, 17, 32, 0.8) 0%, rgba(11, 17, 32, 0.4) 100%),
+        radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1), transparent 60%);
+        
+    z-index: 1;
+    pointer-events: none;
+    animation: ambientPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes ambientPulse {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Ensure the main login/signup container sits above the background layers */
+.container-fluid {
+    position: relative;
+    z-index: 2; 
+}
+
+/* =======================================================
+   Floating Card & Entrance Physics
+   ======================================================= */
+.auth-card-wrapper {
+    perspective: 1000px;
+    z-index: 10;
+}
+
+.auth-card {
+    background: #ffffff;
+    transition: transform 0.5s var(--spring-bounce), box-shadow 0.5s ease;
+    animation: cardPopIn 0.7s var(--spring-bounce) forwards;
+}
+
+@keyframes cardPopIn {
+    0% { opacity: 0; transform: scale(0.9) translateY(40px) rotateX(-5deg); }
+    100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0); }
+}
+
+.auth-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* =======================================================
+   Hyper-Reactive Text & Headers
+   ======================================================= */
+.auth-card h2 {
+    transition: transform 0.4s var(--spring-bounce), color 0.3s ease;
+    display: inline-block;
+}
+.auth-card:hover h2 {
+    transform: translateY(-2px) scale(1.03);
+    color: var(--primary-blue) !important;
+}
+
+.auth-card p.text-muted {
+    transition: transform 0.4s var(--spring-bounce), color 0.3s ease;
+    display: inline-block;
+}
+.auth-card p.text-muted:hover {
+    transform: translateX(6px) scale(1.02);
+    color: #475569 !important;
+}
+
+/* Playful floating doodle note */
+.doodle-float {
+    animation: authFloat 5s ease-in-out infinite;
+    transition: transform 0.3s var(--spring-bounce);
+}
+.doodle-float:hover {
+    animation-play-state: paused;
+    transform: scale(1.2) rotate(5deg) !important;
+    cursor: grab;
+}
+
+@keyframes authFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* =======================================================
+   Logo Circle Direct Hover Physics
+   ======================================================= */
+.icon-circle {
+    transition: transform 0.5s var(--spring-bounce), box-shadow 0.4s ease, background-color 0.3s;
+    cursor: crosshair;
+}
+.icon-circle i {
+    transition: transform 0.4s var(--spring-bounce);
+    display: inline-block;
+}
+
+/* Card hover creates subtle movement */
+.auth-card:hover .icon-circle {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+}
+
+/* DIRECT hover makes it go wild */
+.icon-circle:hover {
+    transform: scale(1.25) rotate(-15deg) translateY(-5px) !important;
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.4) !important;
+}
+.icon-circle:hover i {
+    transform: scale(1.2) rotate(15deg); /* Counter-rotation for pop effect */
+}
+
+/* =======================================================
+   Form Controls & Labels
+   ======================================================= */
+.form-label {
+    transition: transform 0.4s var(--spring-bounce), color 0.3s ease;
+    display: inline-block;
+}
+
+/* Hovering the input group slides the label right */
+.mb-4:hover .form-label, 
+.mb-3:hover .form-label {
+    transform: translateX(6px);
+    color: var(--primary-blue) !important;
+}
+
+.form-control, .input-group-text, .btn {
+    transition: all 0.4s var(--spring-bounce) !important;
+}
+
+.form-control {
+    border-radius: 12px;
+    border: 2px solid #f1f5f9;
+    background-color: #f8fafc !important;
+}
+
+/* Hover State */
+.input-group:hover {
+    transform: translateY(-4px) scale(1.015);
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
+    border-radius: 12px;
+}
+.input-group:hover .form-control {
+    border-color: #93c5fd !important;
+    background-color: #ffffff !important;
+}
+.input-group:hover .input-group-text {
+    background-color: #eff6ff !important;
+    color: var(--primary-blue) !important;
+    border-color: #93c5fd !important;
+}
+.input-group:hover .input-group-text i {
+    transform: scale(1.2) rotate(-10deg);
+    display: inline-block;
+    transition: transform 0.4s var(--spring-bounce);
+}
+
+/* Focus State */
+.input-group:focus-within {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.2);
+    border-radius: 12px;
+    z-index: 10;
+    position: relative;
+}
+.input-group:focus-within .input-group-text {
+    background-color: var(--primary-blue) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-blue) !important;
+}
+.input-group:focus-within .input-group-text i {
+    transform: scale(1.25) rotate(0deg);
+}
+.input-group:focus-within .form-control {
+    border-color: var(--primary-blue) !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+}
+
+/* Password Eye Button */
+.input-group .btn-light:hover {
+    transform: scale(1.1);
+    color: var(--primary-blue) !important;
+    background-color: #e0e7ff !important;
+}
+
+/* =======================================================
+   Buttons & Links
+   ======================================================= */
+.btn-primary-gradient {
+    background: var(--primary-blue-gradient);
+    color: #ffffff;
+    border: none;
+}
+.btn-primary-gradient i {
+    transition: transform 0.4s var(--spring-bounce);
+    display: inline-block;
+}
+.btn-primary-gradient:hover i {
+    transform: scale(1.2) translateX(4px);
+}
+
+.hover-lift {
+    transition: all 0.4s var(--spring-bounce);
+}
+.hover-lift:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.35) !important;
+}
+.hover-lift:active {
+    transform: translateY(2px) scale(0.95);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Links & Animated Arrows */
+.hover-link {
+    position: relative;
+    transition: all 0.3s var(--spring-bounce);
+    display: inline-block;
+}
+.hover-link:hover {
+    color: #1d4ed8 !important;
+    transform: translateY(-2px) scale(1.05);
+}
+.hover-link i.bi-arrow-left {
+    display: inline-block;
+    transition: transform 0.4s var(--spring-bounce);
+}
+.hover-link:hover i.bi-arrow-left {
+    transform: translateX(-6px) scale(1.2); /* Arrow shoots backward */
+}
+
+/* =======================================================
+   Specifics: OTP Verification Boxes (Leaping Effect)
+   ======================================================= */
+.otp-input {
+    width: 54px;
+    height: 64px;
+    font-size: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    background-color: #f8fafc;
+    transition: all 0.4s var(--spring-bounce) !important;
+    cursor: text;
+}
+
+.otp-input:hover {
+    transform: translateY(-6px) scale(1.1) !important;
+    border-color: #93c5fd !important;
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2) !important;
+    background-color: #ffffff;
+    z-index: 5;
+    position: relative;
+}
+
+.otp-input:focus {
+    transform: translateY(-10px) scale(1.15) !important;
+    border-color: var(--primary-blue) !important;
+    box-shadow: 0 16px 32px rgba(37, 99, 235, 0.35) !important;
+    background-color: #ffffff;
+    z-index: 10;
+    position: relative;
+    outline: none;
+}
+
+/* =======================================================
+   Specifics: Password Strength & Rules (Pop out)
+   ======================================================= */
+.password-rules-box {
+    transition: transform 0.4s var(--spring-bounce), box-shadow 0.4s ease;
+}
+.password-rules-box:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+
+.password-rules-box ul li {
+    transition: transform 0.4s var(--spring-bounce), color 0.3s ease;
+    display: block;
+    padding: 2px 0;
+}
+.password-rules-box ul li:hover {
+    transform: translateX(8px) scale(1.02);
+    color: var(--primary-blue) !important;
+    font-weight: 700;
+}
+
+.password-rules-box ul li.valid {
+    color: #10b981 !important; 
+    transform: translateX(4px);
+}
+.password-rules-box ul li.valid i::before {
+    content: "\F26A"; 
+}
+
+/* Expanding Progress Bar on Hover */
+.progress {
+    transition: height 0.4s var(--spring-bounce), box-shadow 0.4s ease !important;
+    cursor: crosshair;
+}
+.progress:hover {
+    height: 14px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+.transition-base {
+    transition: width 0.5s var(--spring-bounce), background-color 0.5s ease;
+}

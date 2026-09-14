@@ -1,0 +1,507 @@
+/* =======================================================
+   SaaS Layout Design Tokens & Physics
+   ======================================================= */
+:root {
+    --bg-canvas: #f2f6fc;
+    --sidebar-bg: #0b132b;
+    --sidebar-link: #8d99ae;
+    --sidebar-link-hover: #ffffff;
+    --primary-blue: #2563eb;
+    --primary-blue-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --card-radius: 20px;
+    --card-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    
+    /* Animation Physics */
+    --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --spring-snappy: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body {
+    background-color: var(--bg-canvas);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* =======================================================
+   Two-Column App Grid Structure
+   ======================================================= */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar-wrapper {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 1.5rem;
+}
+
+.brand-icon-shield {
+    width: 42px;
+    height: 42px;
+    background: var(--primary-blue-gradient);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    transition: transform 0.4s var(--spring-bounce);
+    cursor: pointer;
+}
+.sidebar-brand:hover .brand-icon-shield { transform: scale(1.15) rotate(-8deg); }
+
+.brand-text { display: flex; flex-direction: column; }
+.brand-title { font-weight: 700; color: #ffffff; font-size: 1.05rem; line-height: 1.2; }
+.brand-subtitle { font-size: 0.72rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    color: var(--sidebar-link);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: all 0.3s var(--spring-bounce);
+}
+
+.sidebar-link i { font-size: 1.15rem; transition: transform 0.3s var(--spring-bounce); }
+.sidebar-link:hover { color: var(--sidebar-link-hover); background-color: rgba(255, 255, 255, 0.06); transform: translateX(6px); }
+.sidebar-link:hover i { transform: scale(1.2) rotate(10deg); color: #38bdf8; }
+
+.sidebar-link.active {
+    background: var(--primary-blue-gradient);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+.sidebar-link.active i { color: #ffffff !important; }
+.sidebar-link.active:hover { transform: translateX(4px) scale(1.02); }
+
+.sidebar-footer-widget {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 1rem;
+    transition: transform 0.4s var(--spring-bounce);
+}
+.sidebar-footer-widget:hover { transform: translateY(-4px) scale(1.02); }
+.doodle-note { font-family: 'Caveat', cursive; color: #94a3b8; font-size: 1.2rem; line-height: 1.15; margin-bottom: 0.5rem; transition: color 0.3s ease; }
+.sidebar-footer-widget:hover .doodle-note { color: #38bdf8; }
+.plant-laptop-art svg { width: 100%; height: auto; display: block; }
+
+/* =======================================================
+   Main Content Canvas & Header
+   ======================================================= */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 2.5rem;
+    overflow-x: hidden;
+}
+
+.header-shield-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    transition: transform 0.4s var(--spring-snappy), background-color 0.3s;
+}
+.content-header:hover .header-shield-badge { transform: scale(1.1) rotate(5deg); background-color: #dbeafe !important; }
+.page-heading { font-size: 1.65rem; font-weight: 800; letter-spacing: -0.02em; color: #0f172a; }
+
+.header-doodle { font-family: 'Caveat', cursive; }
+.doodle-text { font-size: 1.35rem; line-height: 1; }
+
+.avatar-dropdown-btn {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    padding: 4px 10px 4px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s var(--spring-bounce);
+}
+.avatar-dropdown-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15); border-color: #93c5fd; }
+.avatar-pill {
+    width: 36px;
+    height: 36px;
+    background: #eff6ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s var(--spring-bounce);
+}
+.avatar-dropdown-btn:hover .avatar-pill { transform: scale(1.1); background: #dbeafe; }
+
+.dropdown-menu {
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    padding: 0.5rem;
+    border-radius: 16px;
+    z-index: 1050 !important;
+}
+.dropdown-menu.show { animation: menuPop 0.4s var(--spring-bounce); transform-origin: top right; }
+.dropdown-item { transition: all 0.3s var(--spring-bounce); border-radius: 8px; margin: 2px 8px; width: calc(100% - 16px); font-weight: 500; padding: 0.6rem 1rem; }
+.dropdown-item i { transition: transform 0.3s var(--spring-bounce); }
+.dropdown-item:hover { background-color: #eff6ff; color: var(--primary-blue); transform: translateX(5px) scale(1.02); }
+.dropdown-item:hover i { transform: scale(1.25); }
+.dropdown-item.text-danger:hover { background-color: #fef2f2; color: #dc2626 !important; }
+
+/* =======================================================
+   Welcome Banner
+   ======================================================= */
+.welcome-banner {
+    background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+    border-radius: var(--card-radius);
+    padding: 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s var(--spring-bounce), box-shadow 0.4s ease;
+}
+.welcome-banner:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.15) !important;
+}
+.banner-icon {
+    width: 64px;
+    height: 64px;
+    background: #ffffff;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #6366f1;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+    transition: transform 0.5s var(--spring-bounce);
+}
+.welcome-banner:hover .banner-icon { transform: scale(1.1) rotate(10deg); }
+
+/* Decorative Elements */
+.banner-decor { position: absolute; border-radius: 50%; opacity: 0.5; }
+.decor-1 { width: 150px; height: 150px; border: 2px solid #818cf8; right: 10%; top: -50px; }
+.decor-2 { width: 80px; height: 80px; border: 2px dashed #a78bfa; right: 5%; bottom: -20px; }
+
+/* =======================================================
+   Metric Grid & Sparkline Cards
+   ======================================================= */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
+}
+.metric-card {
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    padding: 1.35rem 1.4rem 1rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: all 0.4s var(--spring-bounce);
+    cursor: pointer;
+}
+.metric-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+}
+
+.metric-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: all 0.4s var(--spring-bounce);
+}
+.metric-card:hover .metric-icon-box { transform: scale(1.15) rotate(8deg); }
+
+.bg-blue-subtle { background-color: #eff6ff !important; }
+.bg-mint-subtle { background-color: #ecfdf5 !important; }
+.bg-amber-subtle { background-color: #fffbeb !important; }
+
+.text-teal { color: #10b981 !important; }
+.text-amber { color: #f59e0b !important; }
+
+.metric-label { font-size: 0.85rem; color: #64748b; font-weight: 600; display: block; margin-bottom: 0.35rem; }
+.metric-value { font-size: 1.85rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
+
+.sparkline-wrap { margin-top: 0.75rem; display: flex; align-items: center; gap: 10px; }
+.sparkline-wrap svg { height: 28px; flex-grow: 1; }
+.sparkline-label { white-space: nowrap; }
+
+/* =======================================================
+   Layout Grids, Quick Actions & Panels
+   ======================================================= */
+.admin-panel {
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    transition: all 0.4s var(--spring-bounce);
+    position: relative;
+    z-index: 50;
+}
+.admin-panel:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.08) !important;
+}
+
+/* Quick Action Cards */
+.quick-action-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.4s var(--spring-bounce);
+}
+.quick-action-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: #ffffff;
+    border-color: #93c5fd;
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.12);
+}
+.quick-action-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s var(--spring-bounce);
+}
+.quick-action-card:hover .quick-action-icon { transform: scale(1.1) rotate(-8deg); }
+.bg-purple-subtle { background-color: #f5f3ff !important; }
+.text-purple { color: #8b5cf6 !important; }
+
+/* Language Pills */
+.lang-pill {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    padding: 6px 16px 6px 12px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s var(--spring-bounce);
+    cursor: default;
+}
+.lang-pill:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: #ffffff;
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}
+
+/* Hover Lift Button Helper */
+.hover-lift { transition: all 0.3s var(--spring-bounce); }
+.hover-lift:hover { transform: translateY(-2px) scale(1.05); }
+
+/* =======================================================
+   Upload File Dropzone
+   ======================================================= */
+.upload-window-card {
+    transition: all 0.4s var(--spring-bounce);
+}
+.upload-window-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08) !important;
+}
+.file-drop-zone {
+    border-color: #cbd5e1 !important;
+    background-color: #f8fafc;
+    transition: all 0.3s var(--spring-bounce);
+}
+.upload-window-card:hover .file-drop-zone {
+    background-color: #eff6ff;
+    border-color: #93c5fd !important;
+}
+.upload-cloud-icon i {
+    transition: transform 0.4s var(--spring-bounce);
+    display: inline-block;
+}
+.upload-window-card:hover .upload-cloud-icon i {
+    transform: translateY(-8px) scale(1.1);
+}
+
+/* =======================================================
+   Poppy Data Table & Reactive Rows
+   ======================================================= */
+.modern-table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-top: -8px;
+}
+.modern-table thead th {
+    background-color: transparent; 
+    color: #475569;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    border: none;
+    padding: 0.85rem 1rem 0.25rem;
+}
+.modern-table tbody tr {
+    background-color: #ffffff; 
+    transition: all 0.4s var(--spring-bounce);
+    position: relative;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04); 
+    border-radius: 12px;
+}
+.modern-table tbody td {
+    background-color: transparent !important; 
+    border: none !important;
+    padding: 1.1rem 1rem;
+    color: #334155;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+.modern-table tbody td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+.modern-table tbody td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+
+/* Table Row Hover Physics */
+.modern-table tbody tr:hover {
+    background-color: #eff6ff !important; 
+    transform: scale(1.015) translateY(-3px); 
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12); 
+    z-index: 10;
+}
+
+.modern-table .btn { transition: all 0.3s var(--spring-bounce); background-color: #ffffff; }
+.modern-table tbody tr:hover .btn { border-color: #bfdbfe; }
+.modern-table .btn-outline-primary:hover { background-color: var(--primary-blue) !important; color: #ffffff !important; border-color: var(--primary-blue) !important; transform: translateY(-2px) scale(1.1); box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2); }
+.modern-table .btn-outline-danger:hover { background-color: #dc2626 !important; color: #ffffff !important; border-color: #dc2626 !important; transform: translateY(-2px) scale(1.1); box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2); }
+.modern-table .btn:active { transform: scale(0.9); }
+
+/* =======================================================
+   Modern Modals (Hover & Squish Physics)
+   ======================================================= */
+.modal.show .modal-dialog { animation: springModal 0.5s var(--spring-bounce) forwards; }
+@keyframes springModal { 0% { transform: scale(0.8) translateY(20px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
+
+.modal-content { border-radius: var(--card-radius) !important; box-shadow: 0 24px 48px rgba(15, 23, 42, 0.15) !important; border: none !important; }
+
+.modal-footer .btn { transition: all 0.3s var(--spring-bounce); border-radius: 10px; }
+.modal-footer .btn-light { background-color: #ffffff; border: 1px solid #e2e8f0; color: #475569; }
+.modal-footer .btn-light:hover { background-color: #f8fafc; border-color: #cbd5e1; transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06); color: #0f172a; }
+.modal-footer .btn-danger { background-color: #ef4444; border: none; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
+.modal-footer .btn-danger:hover { background-color: #dc2626; transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35); }
+.modal-footer .btn:active { transform: scale(0.92) translateY(2px) !important; box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important; }
+
+.modal-header .btn-close { transition: transform 0.4s var(--spring-bounce); }
+.modal-header .btn-close:hover { transform: rotate(90deg) scale(1.2); }
+.modal-header .rounded-circle { animation: pulseWarning 2s infinite alternate ease-in-out; }
+@keyframes pulseWarning { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 100% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); } }
+
+@media (max-width: 991px) {
+    .sidebar-wrapper { display: none; }
+    .main-content { padding: 1.25rem; }
+}
+
+/* =======================================================
+   Reactive Toast Notifications (Spring Physics)
+   ======================================================= */
+.toast-container {
+    padding: 2rem !important; /* Move away from extreme screen edges */
+    z-index: 9999 !important;
+}
+
+.custom-saas-toast {
+    border-radius: 16px !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-clip: padding-box;
+    transition: transform 0.4s var(--spring-bounce), box-shadow 0.4s ease;
+}
+
+/* Hover Physics for the Toast Box */
+.custom-saas-toast:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 48px rgba(15, 23, 42, 0.3) !important;
+}
+
+/* Spring Entrance Animation */
+.custom-saas-toast.show {
+    animation: toastPopIn 0.5s var(--spring-bounce) forwards;
+}
+
+@keyframes toastPopIn {
+    0% { transform: scale(0.7) translateY(50px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Toast Body Text */
+.custom-saas-toast .toast-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 1.25rem 1.5rem !important;
+}
+
+/* Bouncy Icon Pop Animation */
+.custom-saas-toast .toast-body i {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    animation: iconPop 0.7s var(--spring-bounce) forwards;
+    animation-delay: 0.15s; /* Staggered pop effect */
+    opacity: 0;
+    transform: scale(0);
+}
+
+@keyframes iconPop {
+    0% { transform: scale(0) rotate(-25deg); opacity: 0; }
+    80% { transform: scale(1.4) rotate(10deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Close Button Playful Rotation */
+.custom-saas-toast .btn-close {
+    transition: transform 0.4s var(--spring-bounce);
+    opacity: 0.8;
+    margin-right: 0.5rem;
+}
+
+.custom-saas-toast .btn-close:hover {
+    transform: rotate(90deg) scale(1.3);
+    opacity: 1;
+}
